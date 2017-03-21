@@ -31,8 +31,7 @@ from collections import Counter
 from functools import reduce
 from operator import or_
 
-from docopt import docopt # pip install docopt # or wget https://raw.githubusercontent.com/docopt/docopt/master/docopt.py
-
+import argparse
 try:
     from nltk import ngrams
 except:
@@ -213,16 +212,35 @@ def sentence_bleu_nbest(reference, hypotheses, weights=(0.25, 0.25, 0.25, 0.25),
 
 
 if __name__ == '__main__':
-    arguments = docopt(__doc__, version='BLEU version 0.0.1')
-    # Parse arguments.
-    hypothesis_file = arguments['--translation']
-    reference_file = arguments['--reference']
-    weights = tuple(map(float, arguments['--weights'].split()))
-    segment_level = arguments['--segment-level']
-    smoothing_method = int(arguments['--smooth'])
-    epsilon = float(arguments['--smooth-epsilon'])
-    alpha = float(arguments['--smooth-alpha'])
-    k = float(arguments['--smooth-k'])
+    parser = argparse.ArgumentParser(description='Arguments for calculating BLEU')
+    parser.add_argument('--translation', type=str, required=True, 
+                         help="translation file or string")
+    parser.add_argument('--reference', type=str, required=True, 
+                         help="reference file or string")
+    parser.add_argument('--smooth', type=int, default=1, metavar='INT', required=False, 
+                         help="smoothing method type (default: %(default)s)")
+    parser.add_argument('--weights', type=str, default='0.25 0.25 0.25 0.25',
+                         help="weights for ngram (default: %(default)s)")
+    parser.add_argument('--segment-level', action='store_true',
+                         help="print segment level BLEU score (default: %(default)s)")
+    parser.add_argument('--smooth-epsilon', type=float, default=0.1,
+                         help="empirical smoothing parameter for method 1 (default: %(default)s)")
+    parser.add_argument('--smooth-k', type=int, default=5,
+                         help="empirical smoothing parameter for method 4 (default: %(default)s)")
+    parser.add_argument('--smooth-alpha', type=int, default=5,
+                         help="empirical smoothing parameter for method 6 (default: %(default)s)")
+
+    args = parser.parse_args()
+
+    hypothesis_file = args.translation
+    reference_file = args.reference
+    weights = tuple(map(float, args.weights.split()))
+    segment_level = args.segment_level
+    smoothing_method = args.smooth
+    epsilon = args.smooth_epsilon
+    alpha = args.smooth_alpha
+    k = args.smooth_k
+
     # Calculate BLEU scores.  
     if os.path.isfile(reference_file):
         with io.open(reference_file, 'r', encoding='utf8') as reffin, \
