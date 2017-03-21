@@ -1,6 +1,6 @@
 # BLEU
 
-Sentence level and corpus level BLEU calculation Python ready-to-use tool
+Out-of-the-box Python script for sentence level and corpus level BLEU calculation
 
 # Usage
 
