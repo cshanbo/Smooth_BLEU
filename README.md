@@ -1,8 +1,6 @@
 # BLEU
 
-Sentence level and corpus level BLEU calculation
-
-See [this gist](https://gist.github.com/alvations/838cb021712ad66e7768)
+Sentence level and corpus level BLEU calculation Python ready-to-use tool
 
 # Usage
 
@@ -17,3 +15,5 @@ See [this gist](https://gist.github.com/alvations/838cb021712ad66e7768)
     
     BLEU = 90.36,  66.7/0.0/0.0/0.0 (BP=1.0,  ratio=1.0,  hyp_len=3,  ref_len=3)
 ```
+
+Updated from [this gist](https://gist.github.com/alvations/838cb021712ad66e7768)

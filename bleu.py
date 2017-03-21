@@ -1,23 +1,7 @@
 # -*- coding: utf-8 -*-
 
-"""BLEU.
-
-Usage:
-  bleu.py --reference FILE (or string) --translation FILE (or string) [--weights STR] [--smooth STR] [--smooth-epsilon STR] [--smooth-alpha STR] [--smooth-k STR] [--segment-level]
-  bleu.py -r FILE -t FILE [-w STR] [--smooth STR] [--segment-level]
-  
-Options:
-  -h --help              Show this screen.
-  -r --reference FILE    reference file (Complusory)
-  -t --translation FILE  hypothesis file (Complusory)
-  -w --weights STR       weights [default: 0.25 0.25 0.25 0.25]
-  --segment-level        prints segment level scores
-  --smooth STR           smoothens segment level scores
-  --smooth-epsilon STR   empirical smoothing parameter for method 1 [default: 0.1]
-  --smooth-k STR         empirical smoothing parameter for method 4 [default: 5]
-  --smooth-alpha STR     empirical smoothing parameter for method 6 [default: 5]
-   
-   
+"""
+Sentence level and Corpus level BLEU score calculation tool
 """
 
 from __future__ import division, print_function
