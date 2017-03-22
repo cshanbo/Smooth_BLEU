@@ -202,7 +202,7 @@ if __name__ == '__main__':
                          help="translation file or string")
     parser.add_argument('--reference', type=str, required=True, 
                          help="reference file or string")
-    parser.add_argument('--smooth', type=int, default=1, metavar='INT', required=False, 
+    parser.add_argument('--smooth', type=int, default=3, metavar='INT', required=False, 
                          help="smoothing method type (default: %(default)s)")
     parser.add_argument('--weights', type=str, default='0.25 0.25 0.25 0.25',
                          help="weights for ngram (default: %(default)s)")
