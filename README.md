@@ -8,6 +8,7 @@ Out-of-the-box Python script for sentence level and corpus level BLEU calculatio
 
 1. input FILES
     * `python bleu.py --translation translation.file --reference reference.file`
+    * Set the parameter `--segment-level` and other related parameters, such as `--smooth-epsilon` to print sentence-level BLEU score.
 
 2. input Strings
 ```
