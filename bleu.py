@@ -70,14 +70,17 @@ def corpus_bleu(list_of_references, hypotheses, weights=(0.25, 0.25, 0.25, 0.25)
         
         # Optionally, outputs segment level scores.
         if segment_level:
-            _bp = min(math.exp(1 - closest_ref_len / hyp_len), 1.0)
-            segment_level_precision = chen_and_cherry(references, hypothesis, 
-                                                      segment_level_precision,
-                                                      hyp_len, smoothing, epsilon,
-                                                      alpha)
-            segment_pn = [w*math.log(p_i) if p_i != 0 else 0 for p_i, w in 
-                          zip(segment_level_precision, weights)]
-            print (_bp * math.exp(math.fsum(segment_pn)))
+            if hyp_len == 0:
+                print(0)
+            else:
+                _bp = min(math.exp(1 - closest_ref_len / hyp_len), 1.0)
+                segment_level_precision = chen_and_cherry(references, hypothesis, 
+                                                          segment_level_precision,
+                                                          hyp_len, smoothing, epsilon,
+                                                          alpha)
+                segment_pn = [w*math.log(p_i) if p_i != 0 else 0 for p_i, w in 
+                              zip(segment_level_precision, weights)]
+                print (_bp * math.exp(math.fsum(segment_pn)))
     
     # Calculate corpus-level brevity penalty.
     bp = min(math.exp(1 - ref_lengths / hyp_lengths), 1.0)
