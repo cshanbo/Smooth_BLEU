@@ -186,7 +186,7 @@ def sentence_bleu_nbest(reference, hypotheses, weights=(0.25, 0.25, 0.25, 0.25),
                         smoothing=0, epsilon=0.1, alpha=5, k=5):
     for hi, hypothesis in enumerate(hypotheses):
         print('Translation {}... '.format(hi), file=sys.stderr, end="")
-        bleu_output  =  corpus_bleu([(reference,)], [hypothesis.translation], weights)
+        bleu_output  =  corpus_bleu([(reference,)], [hypothesis], weights)
         bleu_score, p_n, hyp_len, ref_len = bleu_output
         p_n = chen_and_cherry(reference, hypotheses, p_n, hyp_len, smoothing, epsilon)
         segment_pn = [w*math.log(p_i) if p_i != 0 else 0 for p_i, w in 
@@ -226,6 +226,7 @@ if __name__ == '__main__':
     k = args.smooth_k
 
     # Calculate BLEU scores.  
+    # Set --segment-level and other params to calc segment-level BLEU in a FILE or string
     if os.path.isfile(reference_file):
         with io.open(reference_file, 'r', encoding='utf8') as reffin, \
         io.open(hypothesis_file, 'r', encoding='utf8') as hypfin:
@@ -240,5 +241,5 @@ if __name__ == '__main__':
         list_of_references = ((r.split(),) for r in reffin)
         hypotheses = (h.split() for h in hypfin)
         corpus_bleu(list_of_references, hypotheses, 
-                    weights=weights, segment_level=segment_level, 
+                    weights=weights, segment_level=True, 
                     smoothing=smoothing_method, epsilon=epsilon, alpha=alpha, k=k) 
