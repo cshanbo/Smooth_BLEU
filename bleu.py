@@ -198,21 +198,21 @@ def sentence_bleu_nbest(reference, hypotheses, weights=(0.25, 0.25, 0.25, 0.25),
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Arguments for calculating BLEU')
-    parser.add_argument('--translation', type=str, required=True, 
+    parser.add_argument('-t', '--translation', type=str, required=True, 
                          help="translation file or string")
-    parser.add_argument('--reference', type=str, required=True, 
+    parser.add_argument('-r', '--reference', type=str, required=True, 
                          help="reference file or string")
-    parser.add_argument('--smooth', type=int, default=3, metavar='INT', required=False, 
+    parser.add_argument('-s', '--smooth', type=int, default=3, metavar='INT', required=False, 
                          help="smoothing method type (default: %(default)s)")
-    parser.add_argument('--weights', type=str, default='0.25 0.25 0.25 0.25',
+    parser.add_argument('-w', '--weights', type=str, default='0.25 0.25 0.25 0.25',
                          help="weights for ngram (default: %(default)s)")
-    parser.add_argument('--segment-level', action='store_true',
+    parser.add_argument('-sl', '--segment-level', action='store_true',
                          help="print segment level BLEU score (default: %(default)s)")
-    parser.add_argument('--smooth-epsilon', type=float, default=0.1,
+    parser.add_argument('-se', '--smooth-epsilon', type=float, default=0.1,
                          help="empirical smoothing parameter for method 1 (default: %(default)s)")
-    parser.add_argument('--smooth-k', type=int, default=5,
+    parser.add_argument('-sk', '--smooth-k', type=int, default=5,
                          help="empirical smoothing parameter for method 4 (default: %(default)s)")
-    parser.add_argument('--smooth-alpha', type=int, default=5,
+    parser.add_argument('-sa', '--smooth-alpha', type=int, default=5,
                          help="empirical smoothing parameter for method 6 (default: %(default)s)")
 
     args = parser.parse_args()
