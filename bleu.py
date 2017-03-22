@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 """
@@ -10,12 +11,12 @@ import io
 import os
 import math
 import sys
+import argparse
 from fractions import Fraction
 from collections import Counter
 from functools import reduce
 from operator import or_
 
-import argparse
 try:
     from nltk import ngrams
 except:
