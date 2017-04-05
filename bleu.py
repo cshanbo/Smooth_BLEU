@@ -209,8 +209,8 @@ if __name__ == '__main__':
                          help="smoothing method type (default: %(default)s)")
     parser.add_argument('-w', '--weights', type=str, default='0.25 0.25 0.25 0.25',
                          help="weights for ngram (default: %(default)s)")
-    parser.add_argument('-sl', '--segment-level', action='store_true',
-                         help="print segment level BLEU score (default: %(default)s)")
+    parser.add_argument('-sl', '--sentence-level', action='store_true',
+                         help="print sentence level BLEU score (default: %(default)s)")
     parser.add_argument('-se', '--smooth-epsilon', type=float, default=0.1,
                          help="empirical smoothing parameter for method 1 (default: %(default)s)")
     parser.add_argument('-sk', '--smooth-k', type=int, default=5,
@@ -223,14 +223,14 @@ if __name__ == '__main__':
     hypothesis_file = args.translation
     reference_file = args.reference
     weights = tuple(map(float, args.weights.split()))
-    segment_level = args.segment_level
+    segment_level = args.sentence_level
     smoothing_method = args.smooth
     epsilon = args.smooth_epsilon
     alpha = args.smooth_alpha
     k = args.smooth_k
 
     # Calculate BLEU scores.  
-    # Set --segment-level and other params to calc segment-level BLEU in a FILE or string
+    # Set --sentence-level and other params to calc sentence-level BLEU in a FILE or string
     if os.path.isfile(reference_file):
         with io.open(reference_file, 'r', encoding='utf8') as reffin, \
         io.open(hypothesis_file, 'r', encoding='utf8') as hypfin:

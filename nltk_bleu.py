@@ -14,7 +14,7 @@ if __name__ == '__main__':
                          help="reference file")
     parser.add_argument('-t', '--translation', type=str, required=True, 
                          help="translation file")
-    parser.add_argument('-s', '--sentence-level', action='store_true',
+    parser.add_argument('-sl', '--sentence-level', action='store_true',
                          help="print segment level BLEU score (default: %(default)s)")
 
     args = parser.parse_args()
