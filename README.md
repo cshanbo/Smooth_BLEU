@@ -3,6 +3,8 @@
 Out-of-the-box Python script for sentence level and corpus level BLEU calculation
 We recommend users to use `nltk-based` BLEU calculation script by installing [nltk](http://www.nltk.org/) first.
 
+Run `python bleu.py -h` or `python nltk_bleu.py -h` to see the help information
+
 # Usage
 
 `python bleu.py -h` to see the help information

@@ -10,6 +10,7 @@ import argparse
 
 def bleu_calculation(reference='', translation='',
                      sentence_level=False, output='', weights='0.25 0.25 0.25 0.25'):
+    weight = [float(v) for v in weights.split()]
     if sentence_level:
         with open(translation, 'r') as trans, open(reference, 'r') as ref:
             if output is None:
@@ -17,14 +18,14 @@ def bleu_calculation(reference='', translation='',
                     rl = ref.readline()
                     tran_list = tl.strip().split(' ')
                     ref_list = rl.strip().split(' ')
-                    print(nltk.translate.bleu_score.sentence_bleu([ref_list], tran_list))
+                    print(nltk.translate.bleu_score.sentence_bleu([ref_list], tran_list, weight))
             else:
                 with open(output, 'w') as outputfile:
                     for tl in trans:
                         rl = ref.readline()
                         tran_list = tl.strip().split(' ')
                         ref_list = rl.strip().split(' ')
-                        outputfile.write('%s\n' % nltk.translate.bleu_score.sentence_bleu([ref_list], tran_list))
+                        outputfile.write('%s\n' % nltk.translate.bleu_score.sentence_bleu([ref_list], tran_list, weight))
     else:
         with open(translation, 'r') as trans, open(reference, 'r') as ref:
             tran_list, ref_list = [], []
@@ -32,7 +33,7 @@ def bleu_calculation(reference='', translation='',
                 rl = ref.readline()
                 tran_list.append(tl.strip().split(' '))
                 ref_list.append(rl.strip().split(' '))
-        print(nltk.translate.bleu_score.corpus_bleu(ref_list, tran_list))
+        print(nltk.translate.bleu_score.corpus_bleu(ref_list, tran_list, weight))
     return
 
 if __name__ == '__main__':
@@ -41,14 +42,18 @@ if __name__ == '__main__':
                          help="reference file")
     parser.add_argument('-t', '--translation', type=str, required=True, 
                          help="translation file")
-    parser.add_argument('-sl', '--sentence-level', action='store_true',
-                         help="print segment level BLEU score (default: %(default)s)")
     parser.add_argument('-o', '--output', type=str, default=None, required=False, 
                         help="output BLEU score to this file in segment level scenario \
                              (default: %(default)s)")
+    parser.add_argument('-sl', '--sentence-level', action='store_true',
+                         help="print segment level BLEU score (default: %(default)s)")
+    parser.add_argument('-w', '--weights', type=str, required=False, 
+                         default='0.25 0.25 0.25 0.25',
+                         help="weights for n-grams (default: %(default)s)")
 
     args = parser.parse_args()
     bleu_calculation(reference=args.reference,
                      translation=args.translation,
                      sentence_level=args.sentence_level,
-                     output=args.output)
+                     output=args.output, 
+                     weights=args.weights)
