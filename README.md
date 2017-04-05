@@ -1,6 +1,7 @@
 # BLEU
 
 Out-of-the-box Python script for sentence level and corpus level BLEU calculation
+We recommend users to use `nltk-based` BLEU calculation script by installing [nltk](http://www.nltk.org/) first.
 
 # Usage
 
@@ -20,7 +21,7 @@ Out-of-the-box Python script for sentence level and corpus level BLEU calculatio
 Updated from [this gist](https://gist.github.com/alvations/838cb021712ad66e7768)
 
 # nltk-based
-Instead of using `bleu.py`, one can use `nltk_bleu.py` based on [nltk](http://www.nltk.org/)
+Instead of using `bleu.py`, one can use `nltk_bleu.py` based on [nltk](http://www.nltk.org/).
 
 for example:
     ```
@@ -28,3 +29,7 @@ for example:
     ```
 
 Similarly, one can use `--sentence-level` or '-sl' to print sentence-level BLEU score.
+
+# TODO
+1. `bleu.py` check
+2. better wrapper for `nltk_bleu.py`

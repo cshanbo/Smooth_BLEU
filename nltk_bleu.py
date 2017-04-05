@@ -8,10 +8,11 @@ sent bleu using nltk
 import nltk
 import argparse
 
-def bleu_calculation(reference='', translation='', sentence_level=False, output=''):
+def bleu_calculation(reference='', translation='',
+                     sentence_level=False, output='', weights='0.25 0.25 0.25 0.25'):
     if sentence_level:
         with open(translation, 'r') as trans, open(reference, 'r') as ref:
-            if output == '':
+            if output is None:
                 for tl in trans:
                     rl = ref.readline()
                     tran_list = tl.strip().split(' ')
@@ -42,7 +43,7 @@ if __name__ == '__main__':
                          help="translation file")
     parser.add_argument('-sl', '--sentence-level', action='store_true',
                          help="print segment level BLEU score (default: %(default)s)")
-    parser.add_argument('-o', '--output', type=str, default='', required=False, 
+    parser.add_argument('-o', '--output', type=str, default=None, required=False, 
                         help="output BLEU score to this file in segment level scenario \
                              (default: %(default)s)")
 
