@@ -11,7 +11,7 @@ Run `python bleu.py -h` or `python nltk_bleu.py -h` to see the help information
 
 1. input FILES
     * `python bleu.py -t translation.file -t reference.file`
-    * Set the parameter `--segment-level` and other related parameters, such as `--smooth-epsilon`, `--smooth` to print sentence-level BLEU score.
+    * Set the parameter `--sentence-level` and other related parameters, such as `--smooth-epsilon`, `--smooth` to print sentence-level BLEU score.
 
 2. input Strings
 ```
